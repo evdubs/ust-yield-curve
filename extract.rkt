@@ -19,11 +19,6 @@
                   "Download yield curve for specific date (overridden if downloading all)"
                   (date (string->date d "~Y-~m-~d"))])
 
-(displayln (string-append "http://data.treasury.gov/feed.svc/DailyTreasuryYieldCurveRateData"
-                                  "?$filter=day(NEW_DATE) eq " (number->string (date-day (date))) " and "
-                                  "month(NEW_DATE) eq " (number->string (date-month (date))) " and "
-                                  "year(NEW_DATE) eq " (number->string (date-year (date)))))
-
 (call-with-output-file (string-append "/var/tmp/ust/yield-curve/" (date->string (date) "~1") ".xml")
   (λ (out) (~> (if (all)
                    "https://data.treasury.gov/feed.svc/DailyTreasuryYieldCurveRateData"
