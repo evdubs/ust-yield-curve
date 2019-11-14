@@ -1,17 +1,17 @@
 #lang racket/base
 
 (require db
+         gregor
          racket/cmdline
          racket/list
          racket/port
          racket/string
-         srfi/19
          xml
          xml/path)
 
 (define base-folder (make-parameter "/var/tmp/ust/yield-curve"))
 
-(define file-date (make-parameter (current-date)))
+(define file-date (make-parameter (today)))
 
 (define db-user (make-parameter "user"))
 
@@ -27,7 +27,7 @@
                          (base-folder folder)]
  [("-d" "--file-date") date
                        "US Treasury yield curve file date. Defaults to today"
-                       (file-date (string->date date "~Y-~m-~d"))]
+                       (file-date (iso8601->date date))]
  [("-n" "--db-name") name
                      "Database name. Defaults to 'local'"
                      (db-name name)]
@@ -40,12 +40,12 @@
 
 (define dbc (postgresql-connect #:user (db-user) #:database (db-name) #:password (db-pass)))
 
-(let ([file-name (string-append (base-folder) "/" (date->string (file-date) "~1") ".xml")])
+(let ([file-name (string-append (base-folder) "/" (~t (file-date) "yyyy-MM-dd") ".xml")])
   (call-with-input-file file-name
     (λ (in) (let ([xexp (string->xexpr (port->string in))])
               (for-each (λ (entry)
                           (with-handlers ([exn:fail? (λ (e) (displayln (string-append "Failed to process yield curve for date "
-                                                                                      (date->string (file-date) "~1")))
+                                                                                      (~t (file-date) "yyyy-MM-dd")))
                                                        (displayln ((error-value->string-handler) e 1000))
                                                        (rollback-transaction dbc))])
                             

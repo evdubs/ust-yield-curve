@@ -1,14 +1,14 @@
 #lang racket/base
 
-(require net/url
+(require gregor
+         net/url
          racket/cmdline
          racket/port
-         srfi/19 ; Time data types and procedures
          threading)
 
 (define all (make-parameter #f))
 
-(define date (make-parameter (current-date)))
+(define curve-date (make-parameter (today)))
 
 (command-line
  #:program "racket extract.rkt"
@@ -17,15 +17,15 @@
                 (all #t)]
  [("-d" "--date") d
                   "Download yield curve for specific date (overridden if downloading all)"
-                  (date (string->date d "~Y-~m-~d"))])
+                  (curve-date (iso8601->date d))])
 
-(call-with-output-file (string-append "/var/tmp/ust/yield-curve/" (date->string (date) "~1") ".xml")
+(call-with-output-file (string-append "/var/tmp/ust/yield-curve/" (~t (curve-date) "yyyy-MM-dd") ".xml")
   (λ (out) (~> (if (all)
                    "https://data.treasury.gov/feed.svc/DailyTreasuryYieldCurveRateData"
                    (string-append "https://data.treasury.gov/feed.svc/DailyTreasuryYieldCurveRateData"
-                                  "?$filter=day(NEW_DATE) eq " (number->string (date-day (date))) " and "
-                                  "month(NEW_DATE) eq " (number->string (date-month (date))) " and "
-                                  "year(NEW_DATE) eq " (number->string (date-year (date)))))
+                                  "?$filter=day(NEW_DATE) eq " (number->string (->day (curve-date))) " and "
+                                  "month(NEW_DATE) eq " (number->string (->month (curve-date))) " and "
+                                  "year(NEW_DATE) eq " (number->string (->year (curve-date)))))
                (string->url _)
                (get-pure-port _)
                (copy-port _ out)))
