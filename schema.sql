@@ -1,3 +1,5 @@
+CREATE SCHEMA ust;
+
 CREATE TABLE ust.yield_curve
 (
   date date NOT NULL,
