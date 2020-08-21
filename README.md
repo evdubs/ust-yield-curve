@@ -7,7 +7,7 @@ $ racket extract.rkt
 $ racket transform-load.rkt
 ```
 
-You will need to provide a password for `transform-load.rkt`. The available parameters are:
+You will need to provide a database password for `transform-load.rkt`. The available parameters are:
 
 ```bash
 $ racket extract.rkt -h
