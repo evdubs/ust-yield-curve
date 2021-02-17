@@ -1,7 +1,7 @@
 #lang racket/base
 
 (require gregor
-         net/url
+         net/http-easy
          racket/cmdline
          racket/port
          threading)
@@ -14,7 +14,7 @@
  #:program "racket extract.rkt"
  #:once-each
  [("-a" "--all") "Download all available yield curve data"
-                (all #t)]
+                 (all #t)]
  [("-d" "--date") d
                   "Download yield curve for specific date (overridden if downloading all)"
                   (curve-date (iso8601->date d))])
@@ -26,7 +26,7 @@
                                   "?$filter=day(NEW_DATE) eq " (number->string (->day (curve-date))) " and "
                                   "month(NEW_DATE) eq " (number->string (->month (curve-date))) " and "
                                   "year(NEW_DATE) eq " (number->string (->year (curve-date)))))
-               (string->url _)
-               (get-pure-port _)
+               (get _ #:stream? #t)
+               (response-output _)
                (copy-port _ out)))
   #:exists 'replace)

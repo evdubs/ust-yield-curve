@@ -15,5 +15,5 @@ This process assumes you can write to a /var/tmp/ust folder.
 It is recommended that you start with the standard Racket distribution. With that, you will need to install the following packages:
 
 ```bash
-$ raco pkg install --skip-installed gregor threading
+$ raco pkg install --skip-installed gregor http-easy threading
 ```
