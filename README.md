@@ -7,8 +7,35 @@ $ racket extract.rkt
 $ racket transform-load.rkt
 ```
 
-The provided schema.sql file shows the expected schema within the target PostgreSQL instance. 
-This process assumes you can write to a /var/tmp/ust folder.
+You will need to provide a database password for `transform-load.rkt`. The available parameters are:
+
+```bash
+$ racket extract.rkt -h
+racket extract.rkt [ <option> ... ]
+ where <option> is one of
+  -a, --all : Download all available yield curve data
+  -d <d>, --date <d> : Download yield curve for specific date (overridden if downloading all)
+  --help, -h : Show this help
+  -- : Do not treat any remaining argument as a switch (at this level)
+ Multiple single-letter switches can be combined after one `-'; for
+  example: `-h-' is the same as `-h --'
+
+$ racket transform-load.rkt -h
+racket transform-load.rkt [ <option> ... ]
+ where <option> is one of
+  -b <folder>, --base-folder <folder> : US Treasury yield curve base folder. Defaults to /var/tmp/ust/yield-curve
+  -d <date>, --file-date <date> : US Treasury yield curve file date. Defaults to today
+  -n <name>, --db-name <name> : Database name. Defaults to 'local'
+  -p <password>, --db-pass <password> : Database password
+  -u <user>, --db-user <user> : Database user name. Defaults to 'user'
+  --help, -h : Show this help
+  -- : Do not treat any remaining argument as a switch (at this level)
+ Multiple single-letter switches can be combined after one `-'; for
+  example: `-h-' is the same as `-h --'
+```
+
+The provided `schema.sql` file shows the expected schema within the target PostgreSQL instance. 
+This process assumes you can write to a `/var/tmp/ust` folder.
 
 ### Dependencies
 
