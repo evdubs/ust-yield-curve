@@ -26,7 +26,7 @@
                                   "?$filter=day(NEW_DATE) eq " (number->string (->day (curve-date))) " and "
                                   "month(NEW_DATE) eq " (number->string (->month (curve-date))) " and "
                                   "year(NEW_DATE) eq " (number->string (->year (curve-date)))))
-               (get _ #:stream? #t)
-               (response-output _)
-               (copy-port _ out)))
+               (get _)
+               (response-body _)
+               (write-bytes _ out)))
   #:exists 'replace)
