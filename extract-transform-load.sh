@@ -8,3 +8,5 @@ racket ${dir}/extract.rkt
 racket ${dir}/transform-load.rkt -p "$1"
 
 7zr a /var/tmp/ust/yield-curve/${current_year}.7z /var/tmp/ust/yield-curve/${today}.xml
+
+racket ${dir}/dump-dolt.rkt -p "$1"
