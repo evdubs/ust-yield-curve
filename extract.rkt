@@ -19,7 +19,7 @@
                   "Download yield curve for specific date (overridden if downloading all)"
                   (curve-date (iso8601->date d))])
 
-(call-with-output-file (string-append "/var/tmp/ust/yield-curve/" (~t (curve-date) "yyyy-MM-dd") ".xml")
+(call-with-output-file* (string-append "/var/tmp/ust/yield-curve/" (~t (curve-date) "yyyy-MM-dd") ".xml")
   (λ (out) (~> (if (all)
                    "https://data.treasury.gov/feed.svc/DailyTreasuryYieldCurveRateData"
                    (string-append "https://data.treasury.gov/feed.svc/DailyTreasuryYieldCurveRateData"

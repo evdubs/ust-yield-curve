@@ -44,7 +44,7 @@
 
 (define us-treasury-file (string-append (base-folder) "/us-treasury-" (end-date) ".csv"))
 
-(call-with-output-file us-treasury-file
+(call-with-output-file* us-treasury-file
   (λ (out)
     (displayln "date,1_month,2_month,3_month,6_month,1_year,2_year,3_year,5_year,7_year,10_year,20_year,30_year" out)
     (for-each (λ (row)
