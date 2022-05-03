@@ -3,6 +3,7 @@
 (require gregor
          net/http-easy
          racket/cmdline
+         racket/format
          racket/port
          threading)
 
@@ -21,11 +22,12 @@
 
 (call-with-output-file* (string-append "/var/tmp/ust/yield-curve/" (~t (curve-date) "yyyy-MM-dd") ".xml")
   (λ (out) (~> (if (all)
-                   "https://data.treasury.gov/feed.svc/DailyTreasuryYieldCurveRateData"
-                   (string-append "https://data.treasury.gov/feed.svc/DailyTreasuryYieldCurveRateData"
-                                  "?$filter=day(NEW_DATE) eq " (number->string (->day (curve-date))) " and "
-                                  "month(NEW_DATE) eq " (number->string (->month (curve-date))) " and "
-                                  "year(NEW_DATE) eq " (number->string (->year (curve-date)))))
+                   (string-append "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml"
+                                  "?data=daily_treasury_yield_curve&field_tdr_date_value=all")
+                   (string-append "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml"
+                                  "?data=daily_treasury_yield_curve&field_tdr_date_value_month="
+                                  (number->string (->year (curve-date)))
+                                  (~a (number->string (->month (curve-date))) #:width 2 #:pad-string "0" #:align 'right)))
                (get _)
                (response-body _)
                (write-bytes _ out)))

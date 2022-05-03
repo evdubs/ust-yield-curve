@@ -46,7 +46,7 @@
               (for-each (λ (entry)
                           (with-handlers ([exn:fail? (λ (e) (displayln (string-append "Failed to process yield curve for date "
                                                                                       (~t (file-date) "yyyy-MM-dd")))
-                                                       (displayln ((error-value->string-handler) e 1000))
+                                                       (displayln e)
                                                        (rollback-transaction dbc))])
                             
                             (let ([date (se-path*/list '(content m:properties d:NEW_DATE) entry)]
