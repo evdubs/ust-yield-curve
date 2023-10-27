@@ -77,4 +77,4 @@ where
 (system (string-append "cd " (base-folder) "; /usr/local/bin/dolt table import -u --continue us_treasury us-treasury-" (end-date) ".csv"))
 
 (system (string-append "cd " (base-folder) "; /usr/local/bin/dolt add us_treasury; "
-                       "/usr/local/bin/dolt commit -m 'us_treasury " (end-date) " update'; /usr/local/bin/dolt push"))
+                       "/usr/local/bin/dolt commit -m 'us_treasury " (end-date) " update'; /usr/local/bin/dolt push --silent"))
