@@ -78,3 +78,5 @@ where
 
 (system (string-append "cd " (base-folder) "; /usr/local/bin/dolt add us_treasury; "
                        "/usr/local/bin/dolt commit -m 'us_treasury " (end-date) " update'; /usr/local/bin/dolt push --silent"))
+
+(system (string-append "cd " (base-folder) "; /usr/local/bin/dolt gc"))
