@@ -19,7 +19,7 @@
 (define db-pass (make-parameter ""))
 
 (command-line
- #:program "racket dump-dolt-dividends.rkt"
+ #:program "racket dump-dolt.rkt"
  #:once-each
  [("-b" "--base-folder") folder
                          "Base dolt folder. Defaults to /var/tmp/dolt/rates"
