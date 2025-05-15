@@ -28,7 +28,7 @@
                                   "?data=daily_treasury_yield_curve&field_tdr_date_value_month="
                                   (number->string (->year (curve-date)))
                                   (~a (number->string (->month (curve-date))) #:width 2 #:pad-string "0" #:align 'right)))
-               (get _)
+               (get _ #:headers (hash 'Accept "text/html,application/xhtml+xml,application/xml"))
                (response-body _)
                (write-bytes _ out)))
   #:exists 'replace)
