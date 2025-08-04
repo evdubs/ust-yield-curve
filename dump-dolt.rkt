@@ -6,7 +6,7 @@
          racket/string
          racket/system)
 
-(define base-folder (make-parameter "/var/tmp/dolt/rates"))
+(define base-folder (make-parameter "/var/local/dolt/rates"))
 
 (define start-date (make-parameter (~t (today) "yyyy-MM-dd")))
 
@@ -22,7 +22,7 @@
  #:program "racket dump-dolt.rkt"
  #:once-each
  [("-b" "--base-folder") folder
-                         "Base dolt folder. Defaults to /var/tmp/dolt/rates"
+                         "Base dolt folder. Defaults to /var/local/dolt/rates"
                          (base-folder folder)]
  [("-e" "--end-date") end
                       "Final date for history retrieval. Defaults to today"

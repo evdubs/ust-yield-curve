@@ -20,7 +20,7 @@
                   "Download yield curve for specific date (overridden if downloading all)"
                   (curve-date (iso8601->date d))])
 
-(call-with-output-file* (string-append "/var/tmp/ust/yield-curve/" (~t (curve-date) "yyyy-MM-dd") ".xml")
+(call-with-output-file* (string-append "/var/local/ust/yield-curve/" (~t (curve-date) "yyyy-MM-dd") ".xml")
   (λ (out) (~> (if (all)
                    (string-append "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml"
                                   "?data=daily_treasury_yield_curve&field_tdr_date_value=all")

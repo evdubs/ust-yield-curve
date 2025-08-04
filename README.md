@@ -23,7 +23,7 @@ racket extract.rkt [ <option> ... ]
 $ racket transform-load.rkt -h
 racket transform-load.rkt [ <option> ... ]
  where <option> is one of
-  -b <folder>, --base-folder <folder> : US Treasury yield curve base folder. Defaults to /var/tmp/ust/yield-curve
+  -b <folder>, --base-folder <folder> : US Treasury yield curve base folder. Defaults to /var/local/ust/yield-curve
   -d <date>, --file-date <date> : US Treasury yield curve file date. Defaults to today
   -n <name>, --db-name <name> : Database name. Defaults to 'local'
   -p <password>, --db-pass <password> : Database password
@@ -35,7 +35,7 @@ racket transform-load.rkt [ <option> ... ]
 ```
 
 The provided `schema.sql` file shows the expected schema within the target PostgreSQL instance. 
-This process assumes you can write to a `/var/tmp/ust` folder.
+This process assumes you can write to a `/var/local/ust` folder.
 
 ### Dependencies
 

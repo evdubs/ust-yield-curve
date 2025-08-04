@@ -9,7 +9,7 @@
          xml
          xml/path)
 
-(define base-folder (make-parameter "/var/tmp/ust/yield-curve"))
+(define base-folder (make-parameter "/var/local/ust/yield-curve"))
 
 (define file-date (make-parameter (today)))
 
@@ -23,7 +23,7 @@
  #:program "racket transform-load.rkt"
  #:once-each
  [("-b" "--base-folder") folder
-                         "US Treasury yield curve base folder. Defaults to /var/tmp/ust/yield-curve"
+                         "US Treasury yield curve base folder. Defaults to /var/local/ust/yield-curve"
                          (base-folder folder)]
  [("-d" "--file-date") date
                        "US Treasury yield curve file date. Defaults to today"
